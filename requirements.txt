@@ -1,0 +1,6 @@
+redis
+langgraph
+langchain-core
+langchain-ollama
+streamlit
+streamlit-chat 
