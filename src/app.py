@@ -1,4 +1,5 @@
 import streamlit as st
+from utils.model_func import chatServiceStream
 
 st.markdown('<style>' + open('./style.css').read() + '</style>', unsafe_allow_html=True) 
 
@@ -23,7 +24,17 @@ def logout():
     st.rerun()
 
 def home_page():
-    st.title("Home")
+    pt_question = "Quais são as curiosidades sobre o dia de hoje, sou Brasileiro e gosto de ouvir curiosidades sobre o meu pais e em português. Resumo de até 100 caracteres"
+    en_question = "What are the curiosities about today, I'm American and I like to hear curiosities about my country and in English. Summary of up to 100 characters"
+
+    st.header("Wellcome :blue[Lumin]")
+    with st.container():
+        st.subheader('Curiosidade sobre o Brasil!')
+        st.write_stream(chatServiceStream(pt_question))
+
+    with st.container():
+        st.subheader("Curiosity about America!")
+        st.write_stream(chatServiceStream(en_question))
 
 
 role = st.session_state.role
