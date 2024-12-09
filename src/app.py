@@ -47,7 +47,7 @@ home = st.Page(
 )
 chat = st.Page(
     "pages/chat.py",
-    title="Chat",
+    title="ChatBot",
     icon=":material/chat:"
 )
 admin = st.Page(
@@ -61,7 +61,12 @@ account_pages = [logout_page, settings]
 user_page = [home, chat]
 admin_pages = [admin]
 
-st.title("Request manager")
+st.title("ChatLumin")
+st.logo(
+    "https://github.com/andresinho20049/andresinho20049/blob/present/public/Logo_extended.png?raw=true",
+    link="https://andresinho20049.com.br/",
+    icon_image="https://github.com/andresinho20049/andresinho20049/blob/present/public/Logo.png?raw=true",
+)
 
 page_dict = {}
 if st.session_state.role in ["User", "Admin"]:
