@@ -27,6 +27,10 @@ def getModel():
         num_predict = -2,
     )
 
-def chatService(text):
+def chatServiceStream(text):
     model = getModel()
     return model.stream(text)
+
+def chatService(text):
+    model = getModel()
+    return model.invoke(text)

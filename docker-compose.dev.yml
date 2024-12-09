@@ -38,7 +38,6 @@ services:
     entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
     environment:
       - gpus=all
-    #   - OLLAMA_NUM_PARALLEL=4096
     deploy:
       resources:
         reservations:

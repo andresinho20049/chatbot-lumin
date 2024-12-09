@@ -6,3 +6,15 @@ section[data-testid='stSidebar'] {
 header[data-testid="stHeader"] {
     display:none;
 }
+
+/* Toast - Start */
+/* https://github.com/streamlit/streamlit/pull/8433/files/2b52385097da321396c753d81c79e0b684350a2d
+   https://github.com/streamlit/streamlit/blob/1.40.0/frontend/app/src/components/EventContainer/EventContainer.tsx
+*/
+div[data-testid=stToastContainer] {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    transform: translateY(80vh); 
+}
+/* Toast - End */
