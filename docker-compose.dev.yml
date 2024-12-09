@@ -1,0 +1,56 @@
+name: chat_lumin
+
+services:
+  streamlit-ui:
+    build: 
+      context: .
+      target: 'dev'
+    volumes:
+      - ./src:/app
+      - ./public:/app/public
+    entrypoint: ["streamlit", "run", "/app/app.py"]
+    ports:
+      - "8501:8501"
+    networks:
+      - lumin-network
+    depends_on:
+      - redis
+      - ollama
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/usr/local/etc/redis
+    networks:
+      - lumin-network
+  ollama:
+    image: ollama/ollama
+    ports:
+        - 11434:11434
+    volumes:
+      - ./data/ollama:/root/.ollama
+      - ./ollama-entrypoint.sh:/entrypoint.sh
+    container_name: ollama
+    pull_policy: always
+    tty: true
+    restart: always
+    entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
+    environment:
+      - gpus=all
+    #   - OLLAMA_NUM_PARALLEL=4096
+    deploy:
+      resources:
+        reservations:
+          memory: 4096m
+          devices:
+          - driver: nvidia
+            capabilities: ["gpu"]
+            count: all
+    networks:
+      - lumin-network
+    
+networks:
+  lumin-network:
+    driver: bridge
+    
