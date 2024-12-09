@@ -5,20 +5,35 @@ from langchain_core.prompts import ChatPromptTemplate
 from utils.model_func import chatService, getModel
 from utils.database_func import getData
 
+# Initialize chat history
+if "context" not in st.session_state:
+    st.session_state.context = None
+
 st.header("_Streamlit_ is :blue[ChatBot Lumin] :robot_face:")
+previous_context = st.session_state.context if st.session_state.context is not None else ""
 
 def getResponse(user_query, chat_history):
 
-    previous_context = chatService(getData())
-
     template = """
-    You are a helpful assistant. Please answer the following questions considering the conversation history and previous contexts.:
+    You are a helpful assistant. Please answer the following questions considering the conversation history and contexts.:
 
-    Previous Context: {previous_context}
-    
+    You are given a user query, some textual context, chat history and rules, all inside xml tags. You have to answer the query based on the context while respecting the rules.
+
+    Context: {previous_context}
+
+    <rules>
+    - If you don't know, just say so.
+    - If you are not sure, ask for clarification.
+    - Answer in the same language as the user query, and bring a translated version of the English answer if asked in another language.
+    - If the context appears unreadable or of poor quality, tell the user then answer as best as you can.
+    - If the answer is not in the context but you think you know the answer, explain that to the user then answer with your own knowledge.
+    - Answer directly and without using xml tags.
+    </rules>
+        
     Chat history: {chat_history}
 
     User question: {user_question}
+
     """
 
     prompt = ChatPromptTemplate.from_template(template)

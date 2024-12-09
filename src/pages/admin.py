@@ -25,3 +25,4 @@ if get_data_button:
     if response:
         with st.expander("See more"):
             st.write(response)
+        st.session_state.context = response.content
