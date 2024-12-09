@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.model_func import chatServiceStream
+from utils.database_func import getValueByKey
 
 st.markdown('<style>' + open('./style.css').read() + '</style>', unsafe_allow_html=True) 
 
@@ -8,9 +9,7 @@ if "role" not in st.session_state:
 
 ROLES = ["User", "Admin"]
 
-
 def login():
-
     st.header("Log in")
     role = st.selectbox("Choose your role", ROLES)
 
@@ -79,6 +78,9 @@ st.logo(
     icon_image="https://github.com/andresinho20049/andresinho20049/blob/present/public/Logo.png?raw=true",
 )
 
+st.session_state.model_name = getValueByKey("model_name") if getValueByKey("model_name")  is not None else "andresinho20049/lumin"
+st.session_state.base_url = getValueByKey("base_url") if getValueByKey("base_url")  is not None else "http://ollama:11434"
+
 page_dict = {}
 if st.session_state.role in ["User", "Admin"]:
     page_dict["User"] = user_page
@@ -87,6 +89,9 @@ if st.session_state.role == "Admin":
 
 if len(page_dict) > 0:
     pg = st.navigation({"Account": account_pages} | page_dict, position="sidebar", expanded=False)
+    with st.sidebar:
+        st.write(f"Model :blue[ {st.session_state.model_name} ] :robot_face:")
+        st.write(f"Url :blue[{st.session_state.base_url}]")
 else:
     pg = st.navigation([st.Page(login)])
 

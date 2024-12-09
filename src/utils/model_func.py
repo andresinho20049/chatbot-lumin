@@ -1,14 +1,15 @@
+import streamlit as st
 from langchain_ollama.chat_models import ChatOllama
 from langchain_ollama import OllamaEmbeddings
 from utils.database_func import getData
 
-model_name = "andresinho20049/lumin"
-base_url = "http://ollama:11434"
+# model_name = "andresinho20049/lumin"
+# base_url = "http://ollama:11434"
 
 def getContext():
     ollama_embedding = OllamaEmbeddings(
-        model = model_name,
-        base_url = base_url
+        model = st.session_state.model_name,
+        base_url = st.session_state.base_url
     )
 
     collection = []
@@ -21,8 +22,8 @@ def getContext():
 
 def getModel():
     return ChatOllama(
-        model = model_name,
-        base_url = base_url,
+        model = st.session_state.model_name,
+        base_url = st.session_state.base_url,
         temperature = 0.8,
         num_predict = -2,
     )

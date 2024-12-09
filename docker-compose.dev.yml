@@ -17,11 +17,10 @@ services:
       - redis
       - ollama
   redis:
-    image: redis
+    image: redis:alpine3.18
     ports:
       - "6379:6379"
-    volumes:
-      - ./data/redis:/usr/local/etc/redis
+      - '8001:8001'
     networks:
       - lumin-network
   ollama:
