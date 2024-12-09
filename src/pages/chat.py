@@ -1,17 +1,21 @@
 import streamlit as st
 from langchain_core.messages import AIMessage, HumanMessage
-# from langchain_ollama.llms import OllamaLLM
-from langchain_ollama.chat_models import ChatOllama
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
+from utils.model_func import chatService, getModel
+from utils.database_func import getData
 
 st.header("_Streamlit_ is :blue[ChatBot Lumin] :robot_face:")
 
-def get_response(user_query, chat_history):
+def getResponse(user_query, chat_history):
+
+    previous_context = chatService(getData())
 
     template = """
-    You are a helpful assistant. Answer the following questions considering the history of the conversation:
+    You are a helpful assistant. Please answer the following questions considering the conversation history and previous contexts.:
 
+    Previous Context: {previous_context}
+    
     Chat history: {chat_history}
 
     User question: {user_question}
@@ -19,18 +23,12 @@ def get_response(user_query, chat_history):
 
     prompt = ChatPromptTemplate.from_template(template)
 
-    llm = ChatOllama(
-        model = "andresinho20049/lumin",
-        base_url = "http://ollama:11434",
-        temperature = 0.8,
-        num_predict = 256
-    )
+    llm = getModel()
         
     chain = prompt | llm | StrOutputParser()
-    
-    # return llm.invoke(user_query)
 
     return chain.stream({
+        "previous_context": previous_context,
         "chat_history": chat_history,
         "user_question": user_query,
     })
@@ -60,6 +58,6 @@ if user_query is not None and user_query != "":
         st.markdown(user_query)
 
     with st.chat_message("AI"):
-        response = st.write_stream(get_response(user_query, st.session_state.chat_history))
+        response = st.write_stream(getResponse(user_query, st.session_state.chat_history))
 
     st.session_state.chat_history.append(AIMessage(content=response))
