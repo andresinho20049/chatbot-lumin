@@ -2,13 +2,7 @@ name: chat_lumin
 
 services:
   streamlit-ui:
-    build: 
-      dockerfile: ./Dockerfile
-      target: 'dev'
-    volumes:
-      - ./src:/app
-      - ./public:/app/public
-    entrypoint: ["streamlit", "run", "/app/app.py"]
+    build: .
     ports:
       - "8501:8501"
     networks:
