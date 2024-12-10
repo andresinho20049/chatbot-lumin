@@ -1,4 +1,6 @@
 # ChatBot Lumin
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/andresinho20049/chatbot-lumin/blob/main/README.pt-br.md)
+
 A dynamic web-based chatbot powered by Ollama and LangChain, utilizing Streamlit as the frontend framework. This project aims to provide an interactive conversational experience with advanced prompt templates that consider user context, preferences, and query.
 
 ## Features

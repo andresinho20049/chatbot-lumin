@@ -1,4 +1,6 @@
 # ChatBot Lumin 
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/andresinho20049/chatbot-lumin/blob/main/README.md)
+
 Um chatbot dinâmico baseado na web, desenvolvido com Streamlit e Ollama, utilizando LangChain para gestão de conversas avançadas. Este projeto tem como objetivo fornecer uma experiência de conversação interativa com templates de prompts avançados que consideram o contexto do usuário, suas preferências e a consulta.
 
 ## Características
