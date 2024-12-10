@@ -33,7 +33,7 @@ O script `ollama-entrypoint.sh` é utilizado para baixar o modelo quando o conta
 ## Obtenha começado
 1. Faça o download do projeto utilizando 
     ```sh
-    git clone`: `https://github.com/andresinho20049/chatbot-lumin.git
+    git clone https://github.com/andresinho20049/chatbot-lumin.git
     ```
 2. Execute os containers utilizando: 
     * `docker compose up` \

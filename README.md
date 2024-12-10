@@ -33,7 +33,7 @@ The `ollama-entrypoint.sh` script is used to pull the model when the container s
 ## Get Started
 1. Clone the repository using 
     ```sh
-    git clone`: `https://github.com/andresinho20049/chatbot-lumin.git
+    git clone https://github.com/andresinho20049/chatbot-lumin.git
     ```
 2. Run the containers using 
     * `docker compose up` \
